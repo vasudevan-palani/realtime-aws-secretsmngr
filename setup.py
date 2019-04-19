@@ -6,7 +6,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='realtime-aws-secretsmngr',
-    version='0.0.3',
+    version='0.0.4',
     license='TBD',
     author='Vasudevan Palani',
     author_email='vasudevan.palani@gmail.com',
@@ -14,7 +14,7 @@ setup(
     long_description=long_description,
     long_description_content_type='text/markdown',
     packages=['realtimeawssecretsmngr'],
-    install_requires=["appsync-client>=0.0.10"],
+    install_requires=["appsync-client>=0.0.10","paho-mqtt>=1.4.0"],
     include_package_data=True,
     description="Interface to provide callback or push events when secret is updated in aws",
 )
