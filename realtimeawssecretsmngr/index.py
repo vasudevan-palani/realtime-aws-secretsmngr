@@ -25,10 +25,10 @@ class RealTimeAwsSecretsMngr():
         callback(secretString)
 
         secretString = secretString.replace("\"","\\\"")
-        query = json.dumps({"query": "subscription {\n  updatedSecret(id:\""+self.secretId+"\") {\n    id\n    secretString\n  }\n}\n"})
+        query = json.dumps({"query": "subscription {\n  updatedResource(id:\"arn:aws:secretsmanager:::"+self.secretId+"\") {\n    id\n    data\n  }\n}\n"})
 
         def secretcallback(client, userdata, msg):
             logger.debug("New data received : "+str(msg))
-            callback(json.loads(msg.payload).get("data",{}).get("updatedSecret",{}).get("secretString"))
+            callback(json.loads(msg.payload).get("data",{}).get("updatedResource",{}).get("data"))
 
         response = self.client.execute(data=query,callback=secretcallback)
